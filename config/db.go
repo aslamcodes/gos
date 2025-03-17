@@ -1,11 +1,11 @@
-package database
+package config
 
 import (
 	"gorm.io/gorm"
     "os"
     "fmt"
-    "github.com/aslamcodes/gos/internal/donor" 
     "gorm.io/driver/postgres"
+    "gos/models"
 )
 
 var DB *gorm.DB
@@ -27,6 +27,6 @@ func InitDB() {
 
     fmt.Println("Connection established with Database") 
 
-    DB.AutoMigrate(&donor.Donor{})
+    DB.AutoMigrate(&models.Donor{})
 }
 

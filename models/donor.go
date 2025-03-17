@@ -1,4 +1,4 @@
-package donor
+package models
 
 type Donor struct {
     ID uint

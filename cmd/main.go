@@ -1,18 +1,15 @@
 package main
 
 import (
-    "net/http"
-    "github.com/gin-gonic/gin"
-    "github.com/aslamcodes/gos/database"
+    "gos/config"
+    "gos/routes"
 )
 
 
 func main() {
-    database.InitDB()
+    config.InitDB()
     
-    r := gin.Default()
-    r.GET("/", func(c *gin.Context) {
-        c.String(http.StatusOK, "Hello World Again")
-    })
-    r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+    r := routes.SetupRouter()
+
+    r.Run(":8080")
 }
