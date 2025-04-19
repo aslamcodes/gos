@@ -12,7 +12,7 @@ func SetupRouter() *gin.Engine {
 
     donors := r.Group("/donor")
     {
-        donors.GET("/", services.GetDonors)
+        donors.POST("/", services.CreateDonor())
     }
 
     return r

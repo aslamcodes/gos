@@ -1,12 +1,18 @@
 package services
 
 import (
+	"fmt"
+	"gos/models"
 	"gos/repositories"
-	"net/http"
-
-	"github.com/gin-gonic/gin"
 )
 
-func GetDonors(c *gin.Context) {
-    c.JSON(http.StatusOK, repositories.GetDonors())
+func CreateDonor() (any) {
+    donor := &models.Donor{Name: "Alice", UserName: "alice@example.com", ContactInfo: "1234567890",FixedMonthlyAmount: 100, AssignedAdminId: 1 }
+    err := repositories.CreateDonor(donor)
+
+    if err != nil {
+        fmt.Println("Error:", err)
+    }
+
+    return "Created successfully"
 }

@@ -1,32 +1,32 @@
 package config
 
 import (
+	"fmt"
+	"gos/models"
+	"os"
+
+	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-    "os"
-    "fmt"
-    "gorm.io/driver/postgres"
-    "gos/models"
 )
 
 var DB *gorm.DB
 
 func InitDB() {
-    db_host := os.Getenv("DB_HOST")
-    db_port := os.Getenv("DB_PORT")
-    db_user := os.Getenv("DB_USER")
-    db_pass := os.Getenv("DB_PASSWORD")
-    db_name := os.Getenv("DB_NAME")
-    
-    dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable", db_host, db_user, db_pass, db_name, db_port)
+	db_host := os.Getenv("DB_HOST")
+	db_port := os.Getenv("DB_PORT")
+	db_user := os.Getenv("DB_USER")
+	db_pass := os.Getenv("DB_PASSWORD")
+	db_name := os.Getenv("DB_NAME")
 
-    DB, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable", db_host, db_user, db_pass, db_name, db_port)
 
-    if err != nil {
-        panic("Failed to connect to database")
-    }
+	DB, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
-    fmt.Println("Connection established with Database") 
+	if err != nil {
+		panic("Failed to connect to database")
+	}
 
-    DB.AutoMigrate(&models.Donor{})
+	fmt.Println("Connection established with Database")
+
+	DB.AutoMigrate(&models.Donor{})
 }
-
